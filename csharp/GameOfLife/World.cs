@@ -6,23 +6,14 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    class World
+    public class World
     {
-        //private static int _width = 45;
-        //private static int _size = width - 1;
-        //private static int _live = 0;
-        //private static int _dead = 0;
-        //private static int[,] _gameGrid = new int[width, width];
-        //private static int[,] _limbo = new int[width, width];
-
         public static int width { get; } = 45;
         public static int size { get; } = width - 1;
         public static int live { get; set; } = 0;
         public static int dead { get; set; } = 0;
         public static int[,] gameGrid { get; set; } = new int[width, width];
         public static int[,] limbo { get; set; } = new int[width, width];
-
-
 
         public void PrintGameGrid()
         {
@@ -160,7 +151,7 @@ namespace GameOfLife
             bool bottom = false;
             bool left = false;
             if (row == 0) { top = true; }
-            if (col == size) { right = true; }
+            if (col  == size) { right = true; }
             if (row == size) { bottom = true; }
             if (col == 0) { left = true; }
 

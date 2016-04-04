@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace GameOfLife
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
