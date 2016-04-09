@@ -13,12 +13,53 @@ namespace GameOfLifeTests
         [TestMethod]
         public void WorldClassIsNotNull()
         {
-            //Arrage
             World Game = new World();
-            //Act
-
-            //Assert
             Assert.IsNotNull(Game);
+        }
+        [TestMethod]
+        public void GameGridBoundTest()
+        {
+            World Game = new World();
+            Game.PrintGameGrid();
+
+            Assert.AreEqual(0, World.gameGrid[44, 44]);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void GameGridIndexOutOfRange()
+        {
+            World Game = new World();
+            Game.PrintGameGrid();
+
+            Assert.AreNotEqual(0, World.gameGrid[49, 44]);
+        }
+        [TestMethod]
+        public void GameGridSeededBlock()
+        {
+            World Game = new World();
+            Game.Seed("B");
+            Game.PrintGameGrid();
+
+            Assert.AreEqual(1, World.gameGrid[10, 10]);
+        }
+        [TestMethod]
+        public void GameGridSeededGlider()
+        {
+            World Game = new World();
+            Game.Seed("G");
+            Game.PrintGameGrid();
+
+            Assert.AreEqual(1, World.gameGrid[11, 11]);
+        }
+        [TestMethod]
+        public void SecondIterationBlinker()
+        {
+            World Game = new World();
+            Game.Seed("L");
+            Game.PrintGameGrid();
+            Game.Cycle();
+
+            Assert.AreEqual(1, World.gameGrid[10, 10]);
         }
     }
 }
