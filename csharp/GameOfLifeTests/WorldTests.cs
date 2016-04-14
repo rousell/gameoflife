@@ -7,7 +7,7 @@ using GameOfLife;
 
 namespace GameOfLifeTests
 {
-    [TestClass]
+    /*[TestClass]
     public class WorldTests
     {
         [TestMethod]
@@ -60,6 +60,6 @@ namespace GameOfLifeTests
             Game.Cycle();
 
             Assert.AreEqual(1, Game.gameGrid[10, 10]);
-        }
-    }
+        }*/
+    //}
 }

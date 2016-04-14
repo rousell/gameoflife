@@ -14,18 +14,12 @@ namespace GameOfLife
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
         begin:
             Stopwatch timer = new Stopwatch();
-            World Game = new World();
+            World Game = new World(45);
+            GameLogic Logic = new GameLogic();
             Game.live = 0;
             Game.dead = 0;
-            Game.ClearGrid();
-            Console.WriteLine();
-            Console.WriteLine(" This is an implimentation of Conway's Game Of Life");
-            Console.WriteLine();
-            Console.WriteLine(" It simulates the life cycle of simple cells in a Virtual World Grid");
-            Console.WriteLine();
-            Console.WriteLine(" Please choose a Pattern with witch to Seed the Game Grid (enter a letter to choose)");
-            Console.WriteLine();
-            Console.WriteLine(" Just press ENTER at any time to move forward and except the Default selections.");
+            //Logic.ClearGrid(Game);
+            Console.WriteLine(" Welcome to Conway's Game of Life. Please key one of the following to begin: ");
             Console.WriteLine();
             Console.WriteLine("     b = Block");
             Console.WriteLine();
@@ -40,71 +34,60 @@ namespace GameOfLife
             ConsoleKeyInfo seed = Console.ReadKey(true);
             string key = seed.Key.ToString();
             Seed seeded = new Seed();
+            Console.Clear();
             switch (key)  
             {
                 // Still Lifes
                 case "B":  // Block
                     {
                         World BlockGame = seeded.Block(Game);
+                        Logic.Cycle(BlockGame);
+                        Console.ReadKey();
+                        Logic.UpdateGrid(BlockGame);
+                        Logic.PrintGameGrid(BlockGame);
                         break;
                     }
-
                 // Oscilators
                 case "L": // Blinker
                     {
                         World BlinkerGame = seeded.Blinker(Game);
+                        Logic.Cycle(BlinkerGame);
+                        Console.ReadKey();
+                        Logic.UpdateGrid(BlinkerGame);
+                        Logic.PrintGameGrid(BlinkerGame);
+                        Console.ReadKey();
                         break;
                     }
-
                 //Spaceships
                 case "G": // Glider
                     {
                         World GliderGame = seeded.Glider(Game);
+                        Logic.Cycle(GliderGame);
+                        Console.ReadKey();
                         break;
                     }
-
-                case "S": // Lightweight Spaceship
+                default: // Lightweight Spaceship
                     {
                         World LightSpaceShipGame = seeded.LightSpaceShip(Game);
+                        Logic.Cycle(LightSpaceShipGame);
+                        Console.ReadKey();
                         break;
                     }
-
-                case "R":
+                /*default:
                     {
-                        Game.RandomGrid();
+                        /*World RandomGame = seeded.Random(Game);
+                        Logic.Cycle(RandomGame);
+                        Console.ReadKey();
                         break;
-                    }
-
-                default:
-                    {
-                        Game.RandomGrid();
-                        break;
-                    }
+                    }*/
             }
 
-            int seconds = 0;
-            UpdateConsole(Game, seconds);
+            
             Console.ReadKey();
-
-            for (int i = 0; i < 2;)
-            {
-                timer.Start();
-                if (timer.ElapsedMilliseconds % 100 == 0)
-                {
-                    UpdateConsole(Game, seconds);
-                    Game.Cycle();
-                    seconds++;
-                    if (Console.KeyAvailable) { break; }
-                }
-                //timer.Stop();
-            }
-            Console.ReadKey();
-            Console.ReadKey();
-            Console.Clear();
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("               Thanks for Playing! - Total Time = " + (seconds / 10) + " seconds.");
+            Console.WriteLine("               Thanks for Playing!");
             Console.WriteLine();
             Console.WriteLine("            During this game there were " + Game.live + " Live Cells created.");
             Console.WriteLine();
@@ -116,14 +99,5 @@ namespace GameOfLife
             { Console.Clear(); goto begin; }
         }
 
-        public static void UpdateConsole(World wld, int t)
-        {
-            World World = wld;
-            Console.Clear();
-            Console.WriteLine();
-            Console.WriteLine("          LIVE = " + World.live + "    DEAD = " + World.dead + "      TIME = " + t + "        Press ENTER to continue.");
-            Console.WriteLine();
-            World.PrintGameGrid();
-        }
     }
 }

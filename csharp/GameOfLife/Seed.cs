@@ -78,11 +78,21 @@ namespace GameOfLife
             return Game;
         }
 
-        public World Random(World Game)
+        /*public World Random(World Game)
         {
-            Game.RandomGrid();
+            Random rand = new Random();
+            int r = 0;
+
+            for (int x = 0; x <= Game.dimensions; x++)
+                for (int y = 0; y <= Game.dimensions; y++)
+                {
+                    r = rand.Next(0, 2);
+                    if (r == 1)
+                        Game.live = Game.live + 1;
+                    Game.gameGrid[x, y] = r;
+                }
 
             return Game;
-        }                    
+        } */                   
     }
 }
