@@ -8,12 +8,12 @@ namespace GameOfLife
 {
     public class World
     {
-        public static int width { get; } = 45;
-        public static int size { get; } = width - 1;
-        public static int live { get; set; } = 0;
-        public static int dead { get; set; } = 0;
-        public static int[,] gameGrid { get; set; } = new int[width, width];
-        public static int[,] limbo { get; set; } = new int[width, width];
+        public int width { get; } = 45;
+        public int size { get; } = width - 1;
+        public int live { get; set; } = 0;
+        public int dead { get; set; } = 0;
+        public int[,] gameGrid { get; set; } = new int[width, width];
+        public int[,] limbo { get; set; } = new int[width, width];
 
         public void PrintGameGrid()
         {
@@ -199,114 +199,7 @@ namespace GameOfLife
             return count;
         }
 
-        public void Seed(string pattern)
-        {
-            int s = gameGrid.GetLength(0);
-            switch (pattern)                // row, col on indexing
-            {
-                // Still Lifes
-                case "B":  // Block
-                    {
-                        gameGrid[09, 09] = 1;
-                        limbo[09, 09] = 1;
-                        gameGrid[10, 09] = 1;
-                        limbo[10, 09] = 1;
-                        gameGrid[09, 10] = 1;
-                        limbo[09, 10] = 1;
-                        gameGrid[10, 10] = 1;
-                        limbo[10, 10] = 1;
-                        live = live + 4;
-                        break;
-                    }
-
-                // Oscilators
-                case "L": // Blinker
-                    {
-                        gameGrid[09, 09] = 1;
-                        limbo[09, 09] = 1;
-                        gameGrid[09, 10] = 1;
-                        limbo[09, 10] = 1;
-                        gameGrid[09, 11] = 1;
-                        limbo[09, 11] = 1;
-                        live = live + 3;
-                        break;
-                    }
-
-                //Spaceships
-                case "G": // Glider
-                    {
-                        gameGrid[10, 09] = 1;
-                        limbo[10, 09] = 1;
-                        gameGrid[11, 10] = 1;
-                        limbo[11, 10] = 1;
-                        gameGrid[09, 11] = 1;
-                        limbo[09, 11] = 1;
-                        gameGrid[10, 11] = 1;
-                        limbo[10, 11] = 1;
-                        gameGrid[11, 11] = 1;
-                        limbo[11, 11] = 1;
-                        live = live + 5;
-                        break;
-                    }
-
-                case "S": // Lightweight Spaceship
-                    {
-                        gameGrid[10, 10] = 1;
-                        limbo[10, 10] = 1;
-                        gameGrid[10, 13] = 1;
-                        limbo[10, 13] = 1;
-                        gameGrid[11, 14] = 1;
-                        limbo[11, 14] = 1;
-                        gameGrid[12, 10] = 1;
-                        limbo[12, 10] = 1;
-                        gameGrid[12, 14] = 1;
-                        limbo[12, 14] = 1;
-                        gameGrid[13, 11] = 1;
-                        limbo[13, 11] = 1;
-                        gameGrid[13, 12] = 1;
-                        limbo[13, 12] = 1;
-                        gameGrid[13, 13] = 1;
-                        limbo[13, 13] = 1;
-                        gameGrid[13, 14] = 1;
-                        limbo[13, 14] = 1;
-                        live = live + 9;
-                        break;
-                    }
-
-                case "T":
-                    {
-                        gameGrid[10, 09] = 1;
-                        limbo[10, 09] = 1;
-                        gameGrid[09, 09] = 1;
-                        limbo[09, 09] = 1;
-                        gameGrid[08, 10] = 1;
-                        limbo[08, 10] = 1;
-                        gameGrid[09, 11] = 1;
-                        limbo[09, 11] = 1;
-                        gameGrid[07, 08] = 1;
-                        limbo[07, 08] = 1;
-                        gameGrid[07, 09] = 1;
-                        limbo[07, 09] = 1;
-                        gameGrid[06, 08] = 1;
-                        limbo[06, 08] = 1;
-                        gameGrid[06, 07] = 1;
-                        limbo[06, 07] = 1;
-                        live = live + 8;
-                        break;
-                    }
-
-                case "R":
-                    {
-                        RandomGrid();
-                        break;
-                    }
-
-                default:
-                    {
-                        RandomGrid();
-                        break;
-                    }
-            }
+        
         }
     }
 }
