@@ -59,7 +59,7 @@ namespace GameOfLifeTests
             Game.PrintGameGrid();
             Game.Cycle();
 
-            Assert.AreEqual(1, World.gameGrid[10, 10]);
+            Assert.AreEqual(1, Game.gameGrid[10, 10]);
         }
     }
 }
