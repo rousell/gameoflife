@@ -18,7 +18,8 @@ namespace GameOfLife
             GameLogic Logic = new GameLogic();
             Game.live = 0;
             Game.dead = 0;
-            //Logic.ClearGrid(Game);
+            Logic.ClearGrid(Game);
+            Console.WriteLine();
             Console.WriteLine(" Welcome to Conway's Game of Life. Please key one of the following to begin: ");
             Console.WriteLine();
             Console.WriteLine("     b = Block");
@@ -34,26 +35,35 @@ namespace GameOfLife
             ConsoleKeyInfo seed = Console.ReadKey(true);
             string key = seed.Key.ToString();
             Seed seeded = new Seed();
-            Console.Clear();
+            //Console.Clear();
             switch (key)  
             {
                 // Still Lifes
                 case "B":  // Block
                     {
                         World BlockGame = seeded.Block(Game);
-                        Logic.Cycle(BlockGame);
-                        Console.ReadKey();
-                        Logic.UpdateGrid(BlockGame);
+                        Console.Clear();
                         Logic.PrintGameGrid(BlockGame);
+                        Console.ReadKey();
+                        Console.Clear();
+                        Logic.Cycle(BlockGame);
+                        Logic.UpdateGrid(BlockGame);
+                        Console.Clear();
+                        Logic.PrintGameGrid(BlockGame);
+                        Console.ReadKey();
                         break;
                     }
                 // Oscilators
                 case "L": // Blinker
                     {
                         World BlinkerGame = seeded.Blinker(Game);
-                        Logic.Cycle(BlinkerGame);
+                        Console.Clear();
+                        Logic.PrintGameGrid(BlinkerGame);
                         Console.ReadKey();
+                        Console.Clear();
+                        Logic.Cycle(BlinkerGame);
                         Logic.UpdateGrid(BlinkerGame);
+                        Console.Clear();
                         Logic.PrintGameGrid(BlinkerGame);
                         Console.ReadKey();
                         break;
@@ -62,14 +72,28 @@ namespace GameOfLife
                 case "G": // Glider
                     {
                         World GliderGame = seeded.Glider(Game);
+                        Console.Clear();
                         Logic.Cycle(GliderGame);
+                        Console.ReadKey();
+                        Console.Clear();
+                        Logic.Cycle(GliderGame);
+                        Logic.UpdateGrid(GliderGame);
+                        Console.Clear();
+                        Logic.PrintGameGrid(GliderGame);
                         Console.ReadKey();
                         break;
                     }
                 default: // Lightweight Spaceship
                     {
                         World LightSpaceShipGame = seeded.LightSpaceShip(Game);
+                        Console.Clear();
                         Logic.Cycle(LightSpaceShipGame);
+                        Console.ReadKey();
+                        Console.Clear();
+                        Logic.Cycle(LightSpaceShipGame);
+                        Logic.UpdateGrid(LightSpaceShipGame);
+                        Console.Clear();
+                        Logic.PrintGameGrid(LightSpaceShipGame);
                         Console.ReadKey();
                         break;
                     }
@@ -83,7 +107,8 @@ namespace GameOfLife
             }
 
             
-            Console.ReadKey();
+            //Console.ReadKey();
+            Console.Clear();
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
