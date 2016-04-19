@@ -58,6 +58,20 @@ namespace GameOfLifeTests
             Assert.AreEqual(1, GliderGame.gameGrid[11, 11]);
         }
         [TestMethod]
+        public void SecondIterationBlock()
+        {
+            World Game = new World(45);
+            GameLogic Logic = new GameLogic();
+            Seed Seeded = new Seed();
+            World BlockGame = Seeded.Block(Game);
+            Logic.PrintGameGrid(BlockGame);
+            Logic.Cycle(BlockGame);
+            Logic.UpdateGrid(BlockGame);
+            Logic.PrintGameGrid(BlockGame);
+
+            Assert.AreEqual(1, BlockGame.gameGrid[10, 10]);
+        }
+        [TestMethod]
         public void SecondIterationBlinker()
         {
             World Game = new World(45);
